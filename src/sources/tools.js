@@ -28,6 +28,9 @@ let constant = {
 const getRangeRandom = (low, high) => {
 	return Math.ceil(Math.random() * (high - low) + low);
 };
+const get30DegRandom = () => {
+	return (Math.random() > .5 ? '' : '-') + Math.ceil(Math.random() * 30);
+}
 
 const rearrange = (centerIndex,imgsArrangeArr,Constant) => {
 	let centerPos = Constant.centerPos,
@@ -45,15 +48,26 @@ const rearrange = (centerIndex,imgsArrangeArr,Constant) => {
 
 		imgsArrangeCenterArr = imgsArrangeArr.splice(centerIndex,1);
 
-	imgsArrangeCenterArr[0].pos = centerPos;
+	imgsArrangeCenterArr[0] = {
+		pos: centerPos,
+		rotate: 0,
+		isCenter: true
+	};
+
+	imgsArrangeCenterArr[0].rotate = 0;
 
 	topImgSpliceIndex = Math.ceil(Math.random() * (imgsArrangeArr.length - topImgNum));
 	imgsArrangeTopArr = imgsArrangeArr.splice(topImgSpliceIndex, topImgNum);
 
 	imgsArrangeTopArr.forEach((value, index) => {
-		imgsArrangeTopArr[index].pos = {
-			top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
-			left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+		imgsArrangeTopArr[index] = {
+			pos: {
+				top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
+				left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+			},
+			rotate: get30DegRandom(),
+			isCenter: false
+
 		}
 	});
 	for(let i = 0, j = imgsArrangeArr.length, k = j / 2; i < j ; i++){
@@ -65,9 +79,14 @@ const rearrange = (centerIndex,imgsArrangeArr,Constant) => {
 			hPosRangeLORX = hPosRangeRightSecX;
 		}
 
-		imgsArrangeArr[i].pos = {
-			top: getRangeRandom(hPosRangeY[0], hPosRangeY[1]),
-			left: getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+		imgsArrangeArr[i] = {
+			pos: {
+				top: getRangeRandom(hPosRangeY[0], hPosRangeY[1]),
+				left: getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+			},
+			rotate: get30DegRandom(),
+			isCenter: false
+
 		}
 	}
 
@@ -81,8 +100,9 @@ const rearrange = (centerIndex,imgsArrangeArr,Constant) => {
 
 }
 
+
 export default {
 	imageDatasArr,
 	constant,
-	rearrange
+	rearrange,
 }

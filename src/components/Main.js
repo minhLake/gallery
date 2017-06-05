@@ -53,7 +53,6 @@ class AppComponent extends React.Component {
 	}
 
   	render() {
-
   		let controllerUnits = [],
   			imgFigurs = [];
 
@@ -63,11 +62,38 @@ class AppComponent extends React.Component {
   					pos: {
   						left: 0,
   						top: 0
-  					}
+  					},
+  					rotate: 0,
+  					isInverse: false,
+  					isCenter: false
   				}
   			}
+			const inverse = (index, imgsArrangeArr) => {
+				return () => {
+					imgsArrangeArr[index].isInverse = !imgsArrangeArr[index].isInverse;
+					this.setState({
+						imgsArrangeArr: imgsArrangeArr
+					});
+				}
+			};
 
-  			imgFigurs.push(<ImgFigure data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]} />);
+			const center = (index, imgsArrangeArr, constant) => {
+				return () => {
+					let newImgsArrangeArr = Tools.rearrange(index,imgsArrangeArr,constant);
+					this.setState({
+						imgsArrangeArr: newImgsArrangeArr
+					});
+				}
+			}
+  			imgFigurs.push(
+  				<ImgFigure 
+  					data={value} 
+  					ref={'imgFigure' + index} 
+  					arrange={this.state.imgsArrangeArr[index]} 
+  					inverse={inverse(index,this.state.imgsArrangeArr)} 
+  					center={center(index,this.state.imgsArrangeArr,Tools.constant)}
+				/>
+  			);
   		});
 
 	    return (
