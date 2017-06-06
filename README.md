@@ -2,7 +2,10 @@
 慕课图片画廊改版，使用es6语法。
 
 如何下载：
-将git项目克隆到本地，打开命令行，运行 git install
+打开命令行，运行 git clone https://github.com/minhLake/gallery.git
+
+如何搭建本地环境：
+打开命令行，运行 git install
 
 如何打开：
 命令行，运行，git start
