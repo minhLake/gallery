@@ -4,6 +4,7 @@ require('styles/App.css');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ImgFigure from './ImgFigure.js';
+import ControllerUnit from './ControllerUnit.js'
 import Tools from '../sources/tools.js';
 
 
@@ -86,13 +87,10 @@ class AppComponent extends React.Component {
 				}
 			}
   			imgFigurs.push(
-  				<ImgFigure 
-  					data={value} 
-  					ref={'imgFigure' + index} 
-  					arrange={this.state.imgsArrangeArr[index]} 
-  					inverse={inverse(index,this.state.imgsArrangeArr)} 
-  					center={center(index,this.state.imgsArrangeArr,Tools.constant)}
-				/>
+  				<ImgFigure data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]} inverse={inverse(index,this.state.imgsArrangeArr)} center={center(index,this.state.imgsArrangeArr,Tools.constant)} />
+  			);
+  			controllerUnits.push(
+  				<ControllerUnit arrange={this.state.imgsArrangeArr[index]} inverse={inverse(index,this.state.imgsArrangeArr)} center={center(index,this.state.imgsArrangeArr,Tools.constant)} />
   			);
   		});
 

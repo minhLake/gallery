@@ -104,5 +104,5 @@ const rearrange = (centerIndex,imgsArrangeArr,Constant) => {
 export default {
 	imageDatasArr,
 	constant,
-	rearrange,
+	rearrange
 }
